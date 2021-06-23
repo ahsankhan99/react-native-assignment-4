@@ -241,7 +241,7 @@ const Albums = ({ route, navigation }) => {
           {data.map((item) => (
             <ListItem
               key={item.id}
-              onPress={() => navigation.navigate('Photos', { user })}>
+              onPress={() => navigation.navigate('Photos', {album: item })}>
               <Body style={{ justifyContent: 'center' }}>
                 <Text
                   style={{ fontWeight: 'bold', padding: '2%', fontSize: 16 }}>
@@ -260,12 +260,12 @@ const Albums = ({ route, navigation }) => {
 };
 
 const Photos = ({ route, navigation }) => {
-  const { user } = route.params;
+  const { album } = route.params;
   const [data, setData] = useState([]);
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/albums/${user.id}/photos`)
+    fetch(`https://jsonplaceholder.typicode.com/albums/${album.id}/photos`)
       .then((response) => response.json())
       .then((responseJson) => {
         setLoading(false);
